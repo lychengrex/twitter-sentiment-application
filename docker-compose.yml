@@ -12,7 +12,9 @@ services:
   nginx:
     container_name: nginx
     restart: always
-    build: ./nginx
+    image: nginx:1.18.0
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
     ports:
       - "80:80"
       - "443:443"
