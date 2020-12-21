@@ -1,4 +1,7 @@
 flask
 gunicorn
 numpy
-pandas
+jinja2
+tweepy
+vaderSentiment
+colour

@@ -1,4 +1,4 @@
-FROM python:3.7.4
+FROM python:3.8.6
 
 WORKDIR usr/src/flask_app
 COPY . .
