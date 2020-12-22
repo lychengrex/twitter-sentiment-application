@@ -132,6 +132,9 @@ dmypy.json
 .vscode
 
 # textfile
-*.txt
+tokens.txt
 *.log
-/logs
+logs/
+
+# tmp
+tmp/
