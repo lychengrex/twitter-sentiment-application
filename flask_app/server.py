@@ -53,13 +53,15 @@ def home():
 def tweets(name):
     "Display the tweets for a screen name color-coded by sentiment score"
     fetched_tweets = fetch_tweets(api, name)
-    add_color(fetched_tweets["tweets"])
-    return render_template("./tweets.html", fetched_tweets=fetched_tweets)
+    if fetched_tweets["count"]:
+        add_color(fetched_tweets["tweets"])
+        return render_template("./tweets.html", fetched_tweets=fetched_tweets)
+    else:
+        return f"No tweets for {name}!"
 
-
-i = sys.argv.index("server:app")
-twitter_auth_filename = sys.argv[i + 1]
-
+print(sys.argv)
+twitter_auth_filename = sys.argv[-1]
+print(twitter_auth_filename)
 api = authenticate(twitter_auth_filename)
 
 if __name__ == "__main__":
