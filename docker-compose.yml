@@ -7,7 +7,7 @@ services:
     build: ./flask_app
     expose:
       - "8000"
-    entrypoint: gunicorn -c config.py wsgi:server
+    entrypoint: gunicorn -c config.py server:app tokens.txt
 
   nginx:
     container_name: nginx

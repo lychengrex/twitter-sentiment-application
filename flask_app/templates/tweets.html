@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tweets for {{ fetched_tweets['user'] }}</title>
+</head>
+
+<style type="text/css">
+    a:link {
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<body>
+    <h1 style="font-size:130%; font-family:Verdana, sans-serif;">Tweets for {{ fetched_tweets['user'] }}</h1>
+
+    <p style="font-size:80%; font-family:Verdana, sans-serif;">Median sentiment score: {{ fetched_tweets['median_score']
+        }} (-1.0 negative to 1.0
+        positive)
+    <p style="font-size:80%; font-family:Verdana, sans-serif;">Mean sentiment score: {{ fetched_tweets['mean_score']
+        }} (-1.0 negative to 1.0
+        positive)
+
+    <ul>
+        {% for tweet in fetched_tweets['tweets'] %}
+        <li style="list-style:square; font-size:70%; font-family:Verdana, sans-serif; color:{{ tweet.color }}">
+            {{ tweet['score'] }}: <a style="color:{{ tweet.color }}"
+                href="https://twitter.com/twitter/statuses/{{ tweet.id }}"> {{ tweet['text'] }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>
