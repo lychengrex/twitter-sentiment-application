@@ -53,8 +53,14 @@ def home():
 def tweets(name):
     "Display the tweets for a screen name color-coded by sentiment score"
     fetched_tweets = fetch_tweets(api, name)
-    add_color(fetched_tweets["tweets"])
-    return render_template("./tweets.html", fetched_tweets=fetched_tweets)
+    if fetched_tweets:
+        if fetched_tweets["count"]:
+            add_color(fetched_tweets["tweets"])
+            return render_template("./tweets.html", fetched_tweets=fetched_tweets)
+        else:
+            return f"No tweets for {name}!"
+    else:
+        return f"User {name} does not exist!"
 
 
 i = sys.argv.index("server:app")
