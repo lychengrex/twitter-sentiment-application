@@ -16,6 +16,7 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d
     ports:
-      - "5050:5050"
+      # use port 5050 instead of default port 80 to avoid IP attack
+      - "5050:80"
     depends_on:
       - flask_app
