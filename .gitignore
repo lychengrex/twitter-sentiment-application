@@ -138,3 +138,5 @@ logs/
 
 # tmp
 tmp/
+mongo/
+postgres/

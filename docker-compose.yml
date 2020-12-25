@@ -20,3 +20,21 @@ services:
       - "5050:80"
     depends_on:
       - flask_app
+
+  mongo:
+    container_name: mongo
+    image: mongo:4.4.2
+    volumes:
+      - ./mongo/data/db:/data/db # persist data even if container shuts down
+    ports:
+      - "23579:27017"
+
+  postgres:
+    container_name: postgres
+    image: postgres:13.1
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data # persist data even if container shuts down
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=Alpine123
+      - POSTGRES_DB=twitter-api
