@@ -2,12 +2,13 @@
 
 This project aims to analyze text data from Twitter API with a sentiment model and deploys the model by building a web applicaton with `flask`, `gunicorn` and `nginx` on Oracle Cloud.
 
+![](result.jpg)
+
 ## Table of Content
 
 1. [Environment set up](#1-environment-set-up)
     1. [Virtual Machine](#1-1-virtual-machine)
-       1. [Firewall](#1-1-2-firewall)
-       2. [TCP Port](#1-1-3-tcp-port)
+       1. [Firewall](#1-1-1-firewall)
 
     2. [Local computer](#1-2-local-computer)
     3. [Twitter API](#1-3-twitter-api)
@@ -28,15 +29,13 @@ If you would like to set up your service in the cloud, you can try to use always
 
 ### 1-1. Virtual Machine
 
-### 1-1-2. Firewall
+### 1-1-1. Firewall
 
 The Ubuntu firewall is disabled by default, so it is necessary to update your iptables configuration to allow HTTP traffic. Enter `./update_firewall.sh` in the terminal. If the file is not executable, try `chmod +x update_firewall.sh`.
 
-### 1-1-3. TCP Port
-
 ### 1-2 Local Computer
 
-You should install `docker` and `docker-compose`.
+You should install `docker` and `docker-compose`. Execute `run_docker.sh` to run the whole services.
 
 ### 1-3. Twitter API
 
@@ -51,11 +50,13 @@ The service is composed of two dockers. One is `flask_app` which is the web serv
 The web server is composed of `flask` and `gunicorn`.
 
 #### 2-1-1. Flask
-
+Build the web application.
 #### 2-1-2. Gunicorn
-
+Act as the multi-thread web server and the default address is `localhost:8000`. The configuration is at `./flask_app/config.py`.
 ### 2-2. Nginx
+Act as the reverse proxy server and the address for `http` (port `80`) is `localhost:5050`.
 
+**Note**: The configution is at `./nginx/default.conf`. Proxy passes for the web server `localhost:8000` and `http` listens port `80`. To avoid IP attack, map port `80` to port `5050` for external access.
 ## 3. Usage
 
 Start the service with `./run_docker.sh`. Direct the browser to `http://<your-domain>:5050/sentiment/<twitter-screen-name>`.
